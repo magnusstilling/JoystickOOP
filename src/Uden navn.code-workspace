@@ -1,11 +1,8 @@
 {
 	"folders": [
 		{
+			"name": "JoystickOOP",
 			"path": ".."
-		},
-		{
-			"name": "JoystickV2",
-			"path": "../../JoystickV2"
 		}
 	],
 	"settings": {}
