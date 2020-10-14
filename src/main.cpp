@@ -7,11 +7,12 @@ const char * ssid = "TELLO-59FC3F";
 const char * password = "";
 
 AsyncUDP udp;
-
-Joystick joystick1 = Joystick(39, 36, 5); // Instantiate object
-Joystick joystick2 = Joystick(32, 35, 17); // Instantiate object
+// Instantiate objects
+Joystick joystick1 = Joystick(39, 36, 5); 
+Joystick joystick2 = Joystick(32, 35, 17);
 Button buttonBlue = Button(21);
 
+// setup function for connecting to the drone
 void setup() {
   Serial.begin(9600);
     WiFi.mode(WIFI_STA);
@@ -24,42 +25,43 @@ void setup() {
     }
 }
 
+// button for setting drone in command mode
 void command (Button &button){
   if (button.isPressed() == 1){
-    Serial.println("yo");
   udp.writeTo((const uint8_t*)"command", 7, IPAddress(192,168,10,1), 8889);
   }
 }
 
+// joystick button to send "takeoff" command packet
 void takeOff (Joystick &joystick){
   if (joystick.isButtonPressed()){
-    Serial.println("yo");
   udp.writeTo((const uint8_t*)"takeoff", 7, IPAddress(192,168,10,1), 8889);
   }
 }
 
+// joystick button to send "land" command packet
 void land (Joystick &joystick){
   if (joystick.isButtonPressed()){
-    Serial.println("yo");
     udp.writeTo((const uint8_t*)"land", 4, IPAddress(192,168,10,1), 8889);
   }
 }
 
+// joystick movement commands 
 void movement1(Joystick &joystick){
    if (joystick.isInDeadzone() == false && joystick.getJoystickValues().first == 0){
-     udp.writeTo((const uint8_t*)"down 20", 7, IPAddress(192,168,10,1), 8889);
+     udp.writeTo((const uint8_t*)"down 30", 7, IPAddress(192,168,10,1), 8889);
 
    }
    if (joystick.isInDeadzone() == false && joystick.getJoystickValues().first == 4095){
-     udp.writeTo((const uint8_t*)"up 20", 5, IPAddress(192,168,10,1), 8889);
+     udp.writeTo((const uint8_t*)"up 30", 5, IPAddress(192,168,10,1), 8889);
 
    }
     if (joystick.isInDeadzone() == false && joystick.getJoystickValues().second == 0){
-     udp.writeTo((const uint8_t*)"left 20", 7 , IPAddress(192,168,10,1), 8889);
+     udp.writeTo((const uint8_t*)"left 40", 7 , IPAddress(192,168,10,1), 8889);
 
    }
    if (joystick.isInDeadzone() == false && joystick.getJoystickValues().second == 4095){
-     udp.writeTo((const uint8_t*)"right 20", 8, IPAddress(192,168,10,1), 8889);
+     udp.writeTo((const uint8_t*)"right 40", 8, IPAddress(192,168,10,1), 8889);
    }
 }
 void movement2(Joystick &joystick){
@@ -80,6 +82,7 @@ void movement2(Joystick &joystick){
    }
 }
 
+// prints x and y for a joystick object if moved out of deadzone
 void printJoystickValues(Joystick &joystick) {
   if (joystick.isInDeadzone() == false) {
     Serial.print("X ");
