@@ -11,7 +11,7 @@ public:
     }
     
     bool isNoiseDetected(){
-        int offset = 150;
+        int offset = 300;
         int noiseLevel = analogRead(piezoPin);
         Serial.println(noiseLevel);
         bool isNoise = false;

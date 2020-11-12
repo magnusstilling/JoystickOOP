@@ -31,6 +31,7 @@ void setup() {
     }
 }
 // Method for sending udp packages
+
 void sendToDrone(char actionInfo[]){
   //calculates lenght of value in char array
   int letterAmount = strlen(actionInfo);
@@ -66,46 +67,50 @@ void land (Piezo &piezo){
 
 // joystick movement commands 
 void actionsJoystick1(Joystick &joystick){
+  String command;
   if (joystick.isButtonPressed()){
-     char flipLCommand[] = "flip l";
-     sendToDrone(flipLCommand);
+     command = "flip l";
   }
   while (!joystick.isInDeadzone()){
     if (joystick.getJoystickValues().first == 0){
-        char downCommand[] = "down 40";
-        sendToDrone(downCommand); 
+        command = "down 40";
     } else if (joystick.getJoystickValues().first == 4095){
-        char upCommand[] = "up 40";
-        sendToDrone(upCommand);
+        command = "up 40";
     } else if (joystick.getJoystickValues().second == 0){
-        char leftCommand[] = "left 40";
-        sendToDrone(leftCommand);
+        command = "left 40";
     } else if (joystick.getJoystickValues().second == 4095){
-        char rightCommand[] = "right 40"; 
-        sendToDrone(rightCommand);
-    }  
-  } 
+        command = "right 40";
+    }
+  int n = command.length();
+  //Initializes commandArray
+  char commandArray[n + 1];
+  //Fills the commandArray with the contents of the string
+  strcpy(commandArray, command.c_str());
+  sendToDrone(commandArray); 
+  }
 }
 void actionsJoystick2(Joystick &joystick){
+  String command;
   if (joystick.isButtonPressed()){
-     char flipRCommand[] = "flip r";
-     sendToDrone(flipRCommand);
+     command = "flip r";
   }
   while (!joystick.isInDeadzone()){
     if (joystick.getJoystickValues().first == 0){
-        char backCommand[] = "back 40";
-        sendToDrone(backCommand); 
+        command = "back 40"; 
     } else if (joystick.getJoystickValues().first == 4095){
-        char forwardCommand[] = "forward 40";
-        sendToDrone(forwardCommand);
+        command = "forward 40";
     } else if (joystick.getJoystickValues().second == 0){
-        char rotateLCommand[] = "ccw 45";
-        sendToDrone(rotateLCommand);
+        command = "ccw 45";
     } else if (joystick.getJoystickValues().second == 4095){
-        char rotateRCommand[] = "cw 45"; 
-        sendToDrone(rotateRCommand);
+        command = "cw 45";
     } 
   }
+  int n = command.length();
+  //Initializes commandArray
+  char commandArray[n + 1];
+  //Fills the commandArray with the contents of the string
+  strcpy(commandArray, command.c_str());
+  sendToDrone(commandArray);
 }
 
 // prints x and y for a joystick object if moved out of deadzone
