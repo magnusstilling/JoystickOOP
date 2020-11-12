@@ -4,8 +4,8 @@
 #include "WiFi.h"
 #include "AsyncUDP.h"
 
-const char * ssid = "iPhone";
-const char * password = "grimhund";
+const char * ssid = "JesperiPhone";
+const char * password = "1234party";
 
 AsyncUDP udp;
 // Instantiate objects
@@ -14,7 +14,7 @@ Joystick joystick2 = Joystick(32, 35, 13);
 Button buttonBlue = Button(21);
 Button buttonRed = Button(5);
 Piezo piezo = Piezo(36);
-IPAddress IP = IPAddress(172,20,10,7);
+IPAddress IP = IPAddress(172,20,10,5);
 int toPort = 6000;
 
 
@@ -86,8 +86,10 @@ void actionsJoystick1(Joystick &joystick){
   char commandArray[n + 1];
   //Fills the commandArray with the contents of the string
   strcpy(commandArray, command.c_str());
-  sendToDrone(commandArray); 
+  if(command != ""){
+  sendToDrone(commandArray);
   }
+}
 }
 void actionsJoystick2(Joystick &joystick){
   String command;
@@ -110,8 +112,11 @@ void actionsJoystick2(Joystick &joystick){
   char commandArray[n + 1];
   //Fills the commandArray with the contents of the string
   strcpy(commandArray, command.c_str());
+  if(command != ""){
   sendToDrone(commandArray);
+  }
 }
+
 
 // prints x and y for a joystick object if moved out of deadzone
 void printJoystickValues(Joystick &joystick) {
