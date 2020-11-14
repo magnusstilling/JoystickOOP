@@ -4,8 +4,8 @@
 #include "WiFi.h"
 #include "AsyncUDP.h"
 
-const char * ssid = "JesperiPhone";
-const char * password = "1234party";
+const char * ssid = "TELLO-59FC3F";
+const char * password = "";
 
 AsyncUDP udp;
 // Instantiate objects
@@ -14,8 +14,8 @@ Joystick joystick2 = Joystick(32, 35, 13);
 Button buttonBlue = Button(21);
 Button buttonRed = Button(5);
 Piezo piezo = Piezo(36);
-IPAddress IP = IPAddress(172,20,10,5);
-int toPort = 6000;
+IPAddress IP = IPAddress(192,168,10,1);
+int toPort = 8889;
 
 
 // setup function for connecting to the drone
@@ -115,7 +115,7 @@ void actionsJoystick2(Joystick &joystick){
   if(command != ""){
   sendToDrone(commandArray);
   }
-}
+} 
 
 
 // prints x and y for a joystick object if moved out of deadzone
