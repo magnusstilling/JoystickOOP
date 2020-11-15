@@ -73,9 +73,9 @@ void actionsJoystick1(Joystick &joystick){
   }
   while (!joystick.isInDeadzone()){
     if (joystick.getJoystickValues().first == 0){
-        command = "down 40";
+        command = "back 40"; 
     } else if (joystick.getJoystickValues().first == 4095){
-        command = "up 40";
+        command = "forward 40";
     } else if (joystick.getJoystickValues().second == 0){
         command = "left 40";
     } else if (joystick.getJoystickValues().second == 4095){
@@ -98,9 +98,9 @@ void actionsJoystick2(Joystick &joystick){
   }
   while (!joystick.isInDeadzone()){
     if (joystick.getJoystickValues().first == 0){
-        command = "back 40"; 
+        command = "down 40";
     } else if (joystick.getJoystickValues().first == 4095){
-        command = "forward 40";
+        command = "up 40";
     } else if (joystick.getJoystickValues().second == 0){
         command = "ccw 45";
     } else if (joystick.getJoystickValues().second == 4095){
